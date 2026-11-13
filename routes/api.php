@@ -2,6 +2,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Traits\ApiResponses;
 
 // Test Success API Response
@@ -55,4 +56,20 @@ Route::get('/equipments/{id}', function ($id) {
             );
         }
     })->show($id);
+});
+
+// Create Equipment
+Route::post('/equipments', function (Request $request) {
+    return (new class {
+        use ApiResponses;
+
+        public function store($request)
+        {
+            return $this->successResponse(
+                $request->all(),
+                'Equipment created successfully',
+                201
+            );
+        }
+    })->store($request);
 });
