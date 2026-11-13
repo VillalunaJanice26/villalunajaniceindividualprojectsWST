@@ -92,3 +92,21 @@ Route::put('/equipments/{id}', function (Request $request, $id) {
         }
     })->update($request, $id);
 });
+
+// Delete Equipment
+Route::delete('/equipments/{id}', function ($id) {
+    return (new class {
+        use ApiResponses;
+
+        public function destroy($id)
+        {
+            return $this->successResponse(
+                [
+                    'id' => $id
+                ],
+                'Equipment deleted successfully',
+                200
+            );
+        }
+    })->destroy($id);
+});
