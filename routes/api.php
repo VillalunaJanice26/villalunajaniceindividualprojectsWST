@@ -73,3 +73,22 @@ Route::post('/equipments', function (Request $request) {
         }
     })->store($request);
 });
+
+// Update Equipment
+Route::put('/equipments/{id}', function (Request $request, $id) {
+    return (new class {
+        use ApiResponses;
+
+        public function update($request, $id)
+        {
+            return $this->successResponse(
+                array_merge(
+                    ['id' => $id],
+                    $request->all()
+                ),
+                'Equipment updated successfully',
+                200
+            );
+        }
+    })->update($request, $id);
+});
