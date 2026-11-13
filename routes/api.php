@@ -4,6 +4,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponses;
+use App\Http\Controllers\AuthController;
+
+// Authentication - Register
+Route::post('/auth/register', [AuthController::class, 'register']);
 
 // Test Success API Response
 Route::get('/test-success', function () {
