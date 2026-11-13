@@ -1,8 +1,10 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Traits\ApiResponses;
 
+// Test Success API Response
 Route::get('/test-success', function () {
     return (new class {
         use ApiResponses;
@@ -18,4 +20,20 @@ Route::get('/test-success', function () {
             );
         }
     })->test();
+});
+
+// Get All Equipments
+Route::get('/equipments', function () {
+    return (new class {
+        use ApiResponses;
+
+        public function index()
+        {
+            return $this->successResponse(
+                [],
+                'Equipment list retrieved successfully',
+                200
+            );
+        }
+    })->index();
 });
