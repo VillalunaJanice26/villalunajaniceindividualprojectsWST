@@ -37,3 +37,22 @@ Route::get('/equipments', function () {
         }
     })->index();
 });
+
+// Get Equipment by ID
+Route::get('/equipments/{id}', function ($id) {
+    return (new class {
+        use ApiResponses;
+
+        public function show($id)
+        {
+            return $this->successResponse(
+                [
+                    'id' => $id,
+                    'name' => 'Sample Equipment'
+                ],
+                'Equipment retrieved successfully',
+                200
+            );
+        }
+    })->show($id);
+});
