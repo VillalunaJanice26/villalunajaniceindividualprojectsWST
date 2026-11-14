@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponses;
 use App\Http\Controllers\AuthController;
+use App\Models\Equipment;
+use App\Http\Resources\V1\EquipmentResource;
 
 // Authentication - Register
 Route::post('/auth/register', [AuthController::class, 'register']);
@@ -30,20 +32,11 @@ Route::get('/test-success', function () {
     })->test();
 });
 
-// Get All Equipments
+// Get All Equipments using API Resource with Pagination
 Route::get('/equipments', function () {
-    return (new class {
-        use ApiResponses;
+    $equipments = Equipment::paginate(10);
 
-        public function index()
-        {
-            return $this->successResponse(
-                [],
-                'Equipment list retrieved successfully',
-                200
-            );
-        }
-    })->index();
+    return EquipmentResource::collection($equipments);
 });
 
 // Get Equipment by ID
