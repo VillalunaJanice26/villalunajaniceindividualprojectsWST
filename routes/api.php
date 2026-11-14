@@ -117,3 +117,12 @@ Route::delete('/equipments/{id}', function ($id) {
         }
     })->destroy($id);
 });
+
+// Protected Route - Get User Profile
+Route::middleware('auth:api')->get('/user-profile', function (Request $request) {
+    return response()->json([
+        'success' => true,
+        'message' => 'Authenticated user profile',
+        'user' => $request->user()
+    ], 200);
+});
