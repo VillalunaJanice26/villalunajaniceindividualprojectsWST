@@ -42,4 +42,42 @@ class AuthController extends Controller
             'token_type' => 'bearer'
         ], 201);
     }
+
+    // Login User
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $credentials = $request->only('email', 'password');
+
+        $token = JWTAuth::attempt($credentials);
+
+        if (!$token) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email or password'
+            ], 401);
+        }
+
+        $user = JWTAuth::user();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User logged in successfully',
+            'user' => $user,
+            'token' => $token,
+            'token_type' => 'bearer'
+        ], 200);
+    }
 }

@@ -9,6 +9,9 @@ use App\Http\Controllers\AuthController;
 // Authentication - Register
 Route::post('/auth/register', [AuthController::class, 'register']);
 
+// Authentication - Login
+Route::post('/auth/login', [AuthController::class, 'login']);
+
 // Test Success API Response
 Route::get('/test-success', function () {
     return (new class {
