@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Traits\ApiResponses;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorsController;
+use App\Http\Controllers\Api\V1\EquipmentController;
 use App\Models\Equipment;
 use App\Http\Resources\V1\EquipmentResource;
 
@@ -33,12 +34,8 @@ Route::get('/test-success', function () {
     })->test();
 });
 
-// Get All Equipments using API Resource with Pagination
-Route::get('/equipments', function () {
-    $equipments = Equipment::with('author')->paginate(10);
-
-    return EquipmentResource::collection($equipments);
-});
+// Get All Equipments using Optional Include
+Route::get('/equipments', [EquipmentController::class, 'index']);
 
 // Get All Authors
 Route::get('/authors', [AuthorsController::class, 'index']);
