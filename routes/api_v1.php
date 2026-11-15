@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Traits\ApiResponses;
+use App\Http\Controllers\Api\V1\UserEquipmentsController;
 
 // V1 - Get All Equipments
 Route::get('/equipments', function () {
@@ -39,3 +40,6 @@ Route::get('/equipments/{id}', function ($id) {
     })->show($id);
 });
 
+// V1 - Get Equipments of One User
+Route::apiResource('users.equipments', UserEquipmentsController::class)
+    ->only(['index']);
