@@ -52,10 +52,11 @@ Route::put('/equipments/{equipment}', [
 ]);
 
 // V1 - Update Selected Fields (PATCH)
+// JWT authentication required
 Route::patch('/equipments/{equipment}', [
     EquipmentController::class,
     'update'
-]);
+])->middleware('auth:api');
 
 // V1 - Get Equipments of One User
 Route::apiResource('users.equipments', UserEquipmentsController::class)

@@ -34,4 +34,13 @@ trait ApiResponses
 
         return response()->json($response, $status);
     }
+
+    /**
+     * 403 Forbidden: the user is logged in but is not allowed to do this.
+     */
+    protected function notAuthorized(
+        string $message = 'You are not authorized to perform this action.'
+    ) {
+        return $this->errorResponse($message, 403);
+    }
 }

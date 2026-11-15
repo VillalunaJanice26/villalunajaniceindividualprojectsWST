@@ -72,16 +72,20 @@ class EquipmentController extends APIController
 
     /**
      * PATCH /api/v1/equipments/{equipment}
-     * Updates selected equipment fields.
+     * Updates selected equipment fields only if authorized.
      */
     public function update(
         UpdateEquipmentRequest $request,
         Equipment $equipment
     ) {
-        $equipment->update(
-            $request->mappedAttributes()
-        );
+        if ($this->isAble('update', $equipment)) {
+            $equipment->update(
+                $request->mappedAttributes()
+            );
 
-        return new EquipmentResource($equipment);
+            return new EquipmentResource($equipment);
+        }
+
+        return $this->notAuthorized();
     }
 }
