@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Filters\V1\EquipmentFilter;
 use App\Http\Resources\V1\EquipmentResource;
+use App\Http\Requests\Api\V1\StoreEquipmentRequest;
 use App\Models\Equipment;
 
 class EquipmentController extends APIController
 {
+    // GET - Retrieve all equipments
     public function index(EquipmentFilter $filters)
     {
         $equipments = Equipment::filter($filters);
@@ -19,5 +21,20 @@ class EquipmentController extends APIController
         return EquipmentResource::collection(
             $equipments->paginate(10)
         );
+    }
+
+    /**
+     * POST /api/v1/equipments
+     * Create a new equipment.
+     */
+    public function store(StoreEquipmentRequest $request)
+    {
+        $equipment = Equipment::create(
+            $request->mappedAttributes()
+        );
+
+        return (new EquipmentResource($equipment))
+            ->response()
+            ->setStatusCode(201);
     }
 }
