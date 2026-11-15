@@ -37,4 +37,19 @@ class EquipmentController extends APIController
             ->response()
             ->setStatusCode(201);
     }
+
+    /**
+     * DELETE /api/v1/equipments/{equipment}
+     * Deletes the equipment.
+     */
+    public function destroy(Equipment $equipment)
+    {
+        $equipment->delete();
+
+        return $this->successResponse(
+            [],
+            'Equipment successfully deleted',
+            200
+        );
+    }
 }
