@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Filters\V1\EquipmentFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -21,5 +22,11 @@ class Equipment extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Filter Scope
+    public function scopeFilter($query, EquipmentFilter $filters)
+    {
+        return $filters->apply($query);
     }
 }

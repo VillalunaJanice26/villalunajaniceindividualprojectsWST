@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Equipment;
+use App\Http\Filters\V1\EquipmentFilter;
 use App\Http\Resources\V1\EquipmentResource;
+use App\Models\Equipment;
 
 class EquipmentController extends APIController
 {
-    public function index()
+    public function index(EquipmentFilter $filters)
     {
-        $equipments = Equipment::query();
+        $equipments = Equipment::filter($filters);
 
         if ($this->include('author')) {
             $equipments->with('author');
