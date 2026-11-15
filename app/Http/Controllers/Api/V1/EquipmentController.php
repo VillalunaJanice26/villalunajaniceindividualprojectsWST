@@ -6,6 +6,7 @@ use App\Http\Filters\V1\EquipmentFilter;
 use App\Http\Resources\V1\EquipmentResource;
 use App\Http\Requests\Api\V1\StoreEquipmentRequest;
 use App\Http\Requests\Api\V1\ReplaceEquipmentRequest;
+use App\Http\Requests\Api\V1\UpdateEquipmentRequest;
 use App\Models\Equipment;
 
 class EquipmentController extends APIController
@@ -60,6 +61,21 @@ class EquipmentController extends APIController
      */
     public function replace(
         ReplaceEquipmentRequest $request,
+        Equipment $equipment
+    ) {
+        $equipment->update(
+            $request->mappedAttributes()
+        );
+
+        return new EquipmentResource($equipment);
+    }
+
+    /**
+     * PATCH /api/v1/equipments/{equipment}
+     * Updates selected equipment fields.
+     */
+    public function update(
+        UpdateEquipmentRequest $request,
         Equipment $equipment
     ) {
         $equipment->update(

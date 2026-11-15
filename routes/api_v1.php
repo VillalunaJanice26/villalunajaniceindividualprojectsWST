@@ -41,13 +41,20 @@ Route::get('/equipments/{id}', function ($id) {
     })->show($id);
 });
 
-// V1 - Create, Delete, and Replace Equipment
+// V1 - Create and Delete Equipment
 Route::apiResource('equipments', EquipmentController::class)
     ->only(['store', 'destroy']);
 
+// V1 - Replace Equipment (PUT)
 Route::put('/equipments/{equipment}', [
     EquipmentController::class,
     'replace'
+]);
+
+// V1 - Update Selected Fields (PATCH)
+Route::patch('/equipments/{equipment}', [
+    EquipmentController::class,
+    'update'
 ]);
 
 // V1 - Get Equipments of One User
