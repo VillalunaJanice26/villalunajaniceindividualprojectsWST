@@ -4,6 +4,14 @@ namespace App\Http\Filters\V1;
 
 class EquipmentFilter extends QueryFilter
 {
+    protected $sortable = [
+        'name',
+        'category',
+        'location',
+        'status',
+        'created_at',
+    ];
+
     public function status($query, $value)
     {
         $statuses = explode(',', $value);

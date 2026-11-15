@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Filters\V1\UserFilter;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -22,6 +23,12 @@ class User extends Authenticatable implements JWTSubject
     public function equipments(): HasMany
     {
         return $this->hasMany(Equipment::class);
+    }
+
+    // Filter Scope
+    public function scopeFilter($query, UserFilter $filters)
+    {
+        return $filters->apply($query);
     }
 
     /**

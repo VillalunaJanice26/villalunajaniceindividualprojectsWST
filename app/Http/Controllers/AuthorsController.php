@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Filters\V1\UserFilter;
 use App\Http\Resources\V1\UserResource;
+use App\Models\User;
 
 class AuthorsController extends Controller
 {
-    public function index()
+    public function index(UserFilter $filters)
     {
-        $authors = User::paginate(10);
-
-        return UserResource::collection($authors);
+        return UserResource::collection(
+            User::filter($filters)->paginate(10)
+        );
     }
 }
