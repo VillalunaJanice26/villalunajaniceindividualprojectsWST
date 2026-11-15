@@ -19,7 +19,11 @@ class EquipmentResource extends JsonResource
             'serial_number' => $this->serial_number,
             'location' => $this->location,
             'status' => $this->status,
-            'description' => $this->description,
+            'description' => $this->when(
+                $request->route('id') !== null,
+                $this->description
+            ),
+            'author' => new UserResource($this->whenLoaded('author')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

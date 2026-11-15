@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponses;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorsController;
 use App\Models\Equipment;
 use App\Http\Resources\V1\EquipmentResource;
 
@@ -34,28 +35,19 @@ Route::get('/test-success', function () {
 
 // Get All Equipments using API Resource with Pagination
 Route::get('/equipments', function () {
-    $equipments = Equipment::paginate(10);
+    $equipments = Equipment::with('author')->paginate(10);
 
     return EquipmentResource::collection($equipments);
 });
 
+// Get All Authors
+Route::get('/authors', [AuthorsController::class, 'index']);
+
 // Get Equipment by ID
 Route::get('/equipments/{id}', function ($id) {
-    return (new class {
-        use ApiResponses;
+    $equipment = Equipment::with('author')->findOrFail($id);
 
-        public function show($id)
-        {
-            return $this->successResponse(
-                [
-                    'id' => $id,
-                    'name' => 'Sample Equipment'
-                ],
-                'Equipment retrieved successfully',
-                200
-            );
-        }
-    })->show($id);
+    return new EquipmentResource($equipment);
 });
 
 // Create Equipment
