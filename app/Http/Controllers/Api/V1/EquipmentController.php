@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Filters\V1\EquipmentFilter;
 use App\Http\Resources\V1\EquipmentResource;
 use App\Http\Requests\Api\V1\StoreEquipmentRequest;
+use App\Http\Requests\Api\V1\ReplaceEquipmentRequest;
 use App\Models\Equipment;
 
 class EquipmentController extends APIController
@@ -51,5 +52,20 @@ class EquipmentController extends APIController
             'Equipment successfully deleted',
             200
         );
+    }
+
+    /**
+     * PUT /api/v1/equipments/{equipment}
+     * Replaces the equipment.
+     */
+    public function replace(
+        ReplaceEquipmentRequest $request,
+        Equipment $equipment
+    ) {
+        $equipment->update(
+            $request->mappedAttributes()
+        );
+
+        return new EquipmentResource($equipment);
     }
 }
