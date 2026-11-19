@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests\Api\V1;
 
+use App\Permissions\V1\Abilities;
+use Illuminate\Validation\Rule;
+
 class StoreEquipmentRequest extends BaseEquipmentRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     */
     public function rules(): array
     {
-        return [
+        $rules = [
             'data.attributes.name' => ['required', 'string', 'max:255'],
             'data.attributes.category' => ['required', 'string', 'max:255'],
             'data.attributes.serial_number' => ['nullable', 'string', 'max:255'],
@@ -20,5 +20,15 @@ class StoreEquipmentRequest extends BaseEquipmentRequest
             ],
             'data.attributes.description' => ['nullable', 'string'],
         ];
+
+        if (auth('api')->user()?->tokenCan(Abilities::CreateOwnEquipment)) {
+            $rules['data.attributes.user_id'] = [
+                'sometimes',
+                'integer',
+                Rule::in([auth('api')->id()])
+            ];
+        }
+
+        return $rules;
     }
 }
