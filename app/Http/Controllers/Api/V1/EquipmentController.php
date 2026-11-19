@@ -25,49 +25,70 @@ class EquipmentController extends APIController
         );
     }
 
+    // GET - Retrieve one equipment by ID
+    public function show(Equipment $equipment)
+    {
+        return new EquipmentResource($equipment);
+    }
+
     /**
      * POST /api/v1/equipments
-     * Create a new equipment.
+     * Creates equipment, but only if the policy allows this user to do so.
      */
     public function store(StoreEquipmentRequest $request)
     {
-        $equipment = Equipment::create(
-            $request->mappedAttributes()
-        );
+        if ($this->isAble('store', Equipment::class)) {
+            $attributes = $request->mappedAttributes();
 
-        return (new EquipmentResource($equipment))
-            ->response()
-            ->setStatusCode(201);
+            $attributes['user_id'] = auth('api')->id();
+
+            return new EquipmentResource(
+                Equipment::create($attributes)
+            );
+        }
+
+        return $this->notAuthorized(
+            'You are not authorized to create that resource.'
+        );
     }
 
     /**
      * DELETE /api/v1/equipments/{equipment}
-     * Deletes the equipment.
+     * Deletes the equipment, but only if the policy allows it.
      */
     public function destroy(Equipment $equipment)
     {
-        $equipment->delete();
+        if ($this->isAble('delete', $equipment)) {
+            $equipment->delete();
 
-        return $this->successResponse(
-            [],
-            'Equipment successfully deleted',
-            200
+            return response()->json([
+                'success' => true,
+                'message' => 'Equipment successfully deleted'
+            ], 200);
+        }
+
+        return $this->notAuthorized(
+            'You are not authorized to delete that resource.'
         );
     }
 
     /**
      * PUT /api/v1/equipments/{equipment}
-     * Replaces the equipment.
+     * Replaces the whole equipment, but only if the policy allows it.
      */
     public function replace(
         ReplaceEquipmentRequest $request,
         Equipment $equipment
     ) {
-        $equipment->update(
-            $request->mappedAttributes()
-        );
+        if ($this->isAble('replace', $equipment)) {
+            $equipment->update($request->mappedAttributes());
 
-        return new EquipmentResource($equipment);
+            return new EquipmentResource($equipment);
+        }
+
+        return $this->notAuthorized(
+            'You are not authorized to replace that resource.'
+        );
     }
 
     /**

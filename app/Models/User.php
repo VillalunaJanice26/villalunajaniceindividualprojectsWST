@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Filters\V1\UserFilter;
+use App\Permissions\V1\Abilities;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'is_manager'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements JWTSubject
 {
@@ -32,7 +33,19 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Get the identifier that will be stored in the JWT.
+     * Get the attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'is_manager' => 'boolean',
+        ];
+    }
+
+    /**
+     * Get the identifier stored in the JWT.
      */
     public function getJWTIdentifier()
     {
@@ -40,23 +53,26 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Return custom claims for the JWT.
+     * Return the user's abilities as custom JWT claims.
      */
     public function getJWTCustomClaims(): array
     {
-        return [];
+        return [
+            'abilities' => Abilities::getAbilities($this),
+        ];
     }
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Check if the current JWT has a specific ability.
      */
-    protected function casts(): array
+    public function tokenCan(string $ability): bool
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        try {
+            $abilities = auth('api')->payload()->get('abilities') ?? [];
+        } catch (\Throwable $e) {
+            return false;
+        }
+
+        return in_array($ability, $abilities, true);
     }
 }
