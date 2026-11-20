@@ -27,7 +27,25 @@ class StoreEquipmentRequest extends BaseEquipmentRequest
 
     public function rules(): array
     {
-        $rules = [
+        $user = auth('api')->user();
+
+        $userIdRule = [
+            'required',
+            'integer',
+            'exists:users,id',
+            Rule::in([$user->id]),
+        ];
+
+        // Only managers with the broad ability can assign equipment to anyone.
+        if ($user->tokenCan(Abilities::CreateEquipment)) {
+            $userIdRule = [
+                'required',
+                'integer',
+                'exists:users,id',
+            ];
+        }
+
+        return [
             'data.attributes.name' => ['required', 'string', 'max:255'],
             'data.attributes.category' => ['required', 'string', 'max:255'],
             'data.attributes.serial_number' => ['nullable', 'string', 'max:255'],
@@ -37,16 +55,7 @@ class StoreEquipmentRequest extends BaseEquipmentRequest
                 'in:Available,In Use,Under Maintenance'
             ],
             'data.attributes.description' => ['nullable', 'string'],
+            'data.attributes.user_id' => $userIdRule,
         ];
-
-        if (auth('api')->user()?->tokenCan(Abilities::CreateOwnEquipment)) {
-            $rules['data.attributes.user_id'] = [
-                'sometimes',
-                'integer',
-                Rule::in([auth('api')->id()])
-            ];
-        }
-
-        return $rules;
     }
 }
