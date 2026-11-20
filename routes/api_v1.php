@@ -2,6 +2,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\UserEquipmentsController;
 use App\Http\Controllers\Api\V1\EquipmentController;
 
@@ -53,4 +54,18 @@ Route::middleware('auth:api')->group(function () {
         UserEquipmentsController::class,
         'update'
     ])->scopeBindings();
+
+    // User Management Routes
+    Route::apiResource('users', UserController::class)
+        ->except(['update']);
+
+    Route::put('/users/{user}', [
+        UserController::class,
+        'replace'
+    ]);
+
+    Route::patch('/users/{user}', [
+        UserController::class,
+        'update'
+    ]);
 });

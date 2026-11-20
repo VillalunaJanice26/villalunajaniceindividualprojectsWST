@@ -7,17 +7,31 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     */
     public function toArray(Request $request): array
     {
         return [
+            'type' => 'user',
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'attributes' => [
+                'name' => $this->name,
+                'email' => $this->email,
+                'isManager' => $this->is_manager,
+
+                $this->mergeWhen($request->routeIs(['users.*']), [
+                    'emailVerifiedAt' => $this->email_verified_at,
+                    'createdAt' => $this->created_at,
+                    'updatedAt' => $this->updated_at,
+                ]),
+            ],
+
+            // Equipment appears only when requested with ?include=equipments
+            'includes' => EquipmentResource::collection(
+                $this->whenLoaded('equipments')
+            ),
+
+            'links' => [
+                'self' => route('users.show', ['user' => $this->id]),
+            ],
         ];
     }
 }
