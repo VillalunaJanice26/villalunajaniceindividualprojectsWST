@@ -7,6 +7,24 @@ use Illuminate\Validation\Rule;
 
 class StoreEquipmentRequest extends BaseEquipmentRequest
 {
+    protected function prepareForValidation(): void
+    {
+        $user = $this->route('user');
+
+        if ($user) {
+            $attributes = $this->input('data.attributes', []);
+
+            $attributes['user_id'] = $user->id;
+
+            $this->merge([
+                'data' => array_merge(
+                    $this->input('data', []),
+                    ['attributes' => $attributes]
+                ),
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         $rules = [

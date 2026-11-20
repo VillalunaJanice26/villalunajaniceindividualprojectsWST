@@ -26,15 +26,18 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Equipment::class);
     }
 
+    // Singular Equipment Relationship for Scoped Binding
+    public function equipment(): HasMany
+    {
+        return $this->hasMany(Equipment::class);
+    }
+
     // Filter Scope
     public function scopeFilter($query, UserFilter $filters)
     {
         return $filters->apply($query);
     }
 
-    /**
-     * Get the attributes that should be cast.
-     */
     protected function casts(): array
     {
         return [
@@ -44,17 +47,11 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    /**
-     * Get the identifier stored in the JWT.
-     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
-    /**
-     * Return the user's abilities as custom JWT claims.
-     */
     public function getJWTCustomClaims(): array
     {
         return [
@@ -62,9 +59,6 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    /**
-     * Check if the current JWT has a specific ability.
-     */
     public function tokenCan(string $ability): bool
     {
         try {
