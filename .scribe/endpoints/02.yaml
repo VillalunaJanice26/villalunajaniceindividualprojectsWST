@@ -1,0 +1,766 @@
+name: 'Equipment Management'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/equipments
+    metadata:
+      custom: []
+      groupName: 'Equipment Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Retrieve all equipment records.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      'filter[name]':
+        custom: []
+        name: 'filter[name]'
+        description: 'Filter by equipment name. Use * as a wildcard.'
+        required: false
+        example: 'Laptop*'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'filter[status]':
+        custom: []
+        name: 'filter[status]'
+        description: 'Filter by status. Multiple values may be comma-separated.'
+        required: false
+        example: 'Available,In Use'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort:
+        custom: []
+        name: sort
+        description: 'Sort by name, category, location, status, or created_at.'
+        required: false
+        example: name
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      include:
+        custom: []
+        name: include
+        description: 'Include related author information.'
+        required: false
+        example: author
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      'filter[name]': 'Laptop*'
+      'filter[status]': 'Available,In Use'
+      sort: name
+      include: author
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Desktop Computer","category":"Computer Equipment","serial_number":"PC-2026-001","location":"Computer Laboratory","status":"Available","author":{"type":"user","id":1,"attributes":{"name":"Janice Villaluna","email":"janice@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/1"}},"created_at":"2026-11-14T13:14:58.000000Z","updated_at":"2026-11-15T04:11:53.000000Z"},{"id":7,"name":"Laptop Dell Test","category":"Computer Equipment","serial_number":"DELL-TEST-001","location":"IT Laboratory","status":"Available","author":null,"created_at":"2026-11-19T06:03:01.000000Z","updated_at":"2026-11-19T06:03:01.000000Z"},{"id":8,"name":"Laptop HP Regular User","category":"Computer Equipment","serial_number":"HP-REGULAR-001","location":"Computer Laboratory","status":"Available","author":null,"created_at":"2026-11-19T06:06:06.000000Z","updated_at":"2026-11-19T06:06:06.000000Z"},{"id":13,"name":"Manager Assigned Equipment","category":"Computer","serial_number":"MGR-024","location":"IT Office","status":"Available","author":{"type":"user","id":2,"attributes":{"name":"Regular User","email":"user@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/2"}},"created_at":"2026-11-20T13:58:14.000000Z","updated_at":"2026-11-20T13:58:14.000000Z"},{"id":3,"name":"Printer","category":"Office Equipment","serial_number":"PT-2026-001","location":"Admin Office","status":"Under Maintenance","author":null,"created_at":"2026-11-14T13:14:58.000000Z","updated_at":"2026-11-14T13:14:58.000000Z"},{"id":2,"name":"Projector","category":"Presentation Equipment","serial_number":"PR-2026-001","location":"Conference Room","status":"In Use","author":null,"created_at":"2026-11-14T13:14:58.000000Z","updated_at":"2026-11-14T13:14:58.000000Z"},{"id":10,"name":"Regular User Own Equipment","category":"Computer Equipment","serial_number":"USER-OWN-021","location":"IT Laboratory","status":"Available","author":{"type":"user","id":2,"attributes":{"name":"Regular User","email":"user@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/2"}},"created_at":"2026-11-19T07:53:19.000000Z","updated_at":"2026-11-19T07:53:19.000000Z"},{"id":12,"name":"Test Equipment","category":"Computer","serial_number":"TEST-024","location":"IT Office","status":"Available","author":{"type":"user","id":3,"attributes":{"name":"Manager User","email":"manager@example.com","isManager":true},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/3"}},"created_at":"2026-11-20T13:56:02.000000Z","updated_at":"2026-11-20T14:09:55.000000Z"},{"id":6,"name":"Updated Equipment","category":"Office Equipment","serial_number":"NEW-2026-001","location":"New Laboratory","status":"Available","author":{"type":"user","id":1,"attributes":{"name":"Janice Villaluna","email":"janice@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/1"}},"created_at":"2026-11-15T09:34:16.000000Z","updated_at":"2026-11-15T11:41:48.000000Z"}],"links":{"first":"http:\/\/localhost:8000\/api\/equipments?page=1","last":"http:\/\/localhost:8000\/api\/equipments?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/equipments?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/localhost:8000\/api\/equipments","per_page":10,"to":9,"total":9}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/equipments
+    metadata:
+      custom: []
+      groupName: 'Equipment Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Retrieve all equipment records.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      'filter[name]':
+        custom: []
+        name: 'filter[name]'
+        description: 'Filter by equipment name. Use * as a wildcard.'
+        required: false
+        example: 'Laptop*'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'filter[status]':
+        custom: []
+        name: 'filter[status]'
+        description: 'Filter by status. Multiple values may be comma-separated.'
+        required: false
+        example: 'Available,In Use'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort:
+        custom: []
+        name: sort
+        description: 'Sort by name, category, location, status, or created_at.'
+        required: false
+        example: name
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      include:
+        custom: []
+        name: include
+        description: 'Include related author information.'
+        required: false
+        example: author
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      'filter[name]': 'Laptop*'
+      'filter[status]': 'Available,In Use'
+      sort: name
+      include: author
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[{"id":1,"name":"Desktop Computer","category":"Computer Equipment","serial_number":"PC-2026-001","location":"Computer Laboratory","status":"Available","author":{"type":"user","id":1,"attributes":{"name":"Janice Villaluna","email":"janice@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/1"}},"created_at":"2026-11-14T13:14:58.000000Z","updated_at":"2026-11-15T04:11:53.000000Z"},{"id":7,"name":"Laptop Dell Test","category":"Computer Equipment","serial_number":"DELL-TEST-001","location":"IT Laboratory","status":"Available","author":null,"created_at":"2026-11-19T06:03:01.000000Z","updated_at":"2026-11-19T06:03:01.000000Z"},{"id":8,"name":"Laptop HP Regular User","category":"Computer Equipment","serial_number":"HP-REGULAR-001","location":"Computer Laboratory","status":"Available","author":null,"created_at":"2026-11-19T06:06:06.000000Z","updated_at":"2026-11-19T06:06:06.000000Z"},{"id":13,"name":"Manager Assigned Equipment","category":"Computer","serial_number":"MGR-024","location":"IT Office","status":"Available","author":{"type":"user","id":2,"attributes":{"name":"Regular User","email":"user@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/2"}},"created_at":"2026-11-20T13:58:14.000000Z","updated_at":"2026-11-20T13:58:14.000000Z"},{"id":3,"name":"Printer","category":"Office Equipment","serial_number":"PT-2026-001","location":"Admin Office","status":"Under Maintenance","author":null,"created_at":"2026-11-14T13:14:58.000000Z","updated_at":"2026-11-14T13:14:58.000000Z"},{"id":2,"name":"Projector","category":"Presentation Equipment","serial_number":"PR-2026-001","location":"Conference Room","status":"In Use","author":null,"created_at":"2026-11-14T13:14:58.000000Z","updated_at":"2026-11-14T13:14:58.000000Z"},{"id":10,"name":"Regular User Own Equipment","category":"Computer Equipment","serial_number":"USER-OWN-021","location":"IT Laboratory","status":"Available","author":{"type":"user","id":2,"attributes":{"name":"Regular User","email":"user@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/2"}},"created_at":"2026-11-19T07:53:19.000000Z","updated_at":"2026-11-19T07:53:19.000000Z"},{"id":12,"name":"Test Equipment","category":"Computer","serial_number":"TEST-024","location":"IT Office","status":"Available","author":{"type":"user","id":3,"attributes":{"name":"Manager User","email":"manager@example.com","isManager":true},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/3"}},"created_at":"2026-11-20T13:56:02.000000Z","updated_at":"2026-11-20T14:09:55.000000Z"},{"id":6,"name":"Updated Equipment","category":"Office Equipment","serial_number":"NEW-2026-001","location":"New Laboratory","status":"Available","author":{"type":"user","id":1,"attributes":{"name":"Janice Villaluna","email":"janice@example.com","isManager":false},"links":{"self":"http:\/\/localhost:8000\/api\/v1\/users\/1"}},"created_at":"2026-11-15T09:34:16.000000Z","updated_at":"2026-11-15T11:41:48.000000Z"}],"links":{"first":"http:\/\/localhost:8000\/api\/v1\/equipments?page=1","last":"http:\/\/localhost:8000\/api\/v1\/equipments?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/v1\/equipments?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/localhost:8000\/api\/v1\/equipments","per_page":10,"to":9,"total":9}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/equipments/{equipment_id}'
+    metadata:
+      custom: []
+      groupName: 'Equipment Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Retrieve one equipment record by ID.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      equipment_id:
+        custom: []
+        name: equipment_id
+        description: 'The ID of the equipment.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      equipment:
+        custom: []
+        name: equipment
+        description: 'The ID of the equipment.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      equipment_id: 1
+      equipment: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":1,"name":"Desktop Computer","category":"Computer Equipment","serial_number":"PC-2026-001","location":"Computer Laboratory","status":"Available","created_at":"2026-11-14T13:14:58.000000Z","updated_at":"2026-11-15T04:11:53.000000Z"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/equipments
+    metadata:
+      custom: []
+      groupName: 'Equipment Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data:
+        custom: []
+        name: data
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'Equipment name.'
+        required: true
+        example: Laptop
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.category:
+        custom: []
+        name: data.attributes.category
+        description: 'Equipment category.'
+        required: true
+        example: Computer
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.serial_number:
+        custom: []
+        name: data.attributes.serial_number
+        description: 'Serial number.'
+        required: false
+        example: SN-001
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      data.attributes.location:
+        custom: []
+        name: data.attributes.location
+        description: 'Equipment location.'
+        required: true
+        example: 'Computer Laboratory'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.status:
+        custom: []
+        name: data.attributes.status
+        description: 'Equipment status.'
+        required: false
+        example: Available
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      data.attributes.description:
+        custom: []
+        name: data.attributes.description
+        description: 'Equipment description.'
+        required: false
+        example: 'Office laptop'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      data.attributes.user_id:
+        custom: []
+        name: data.attributes.user_id
+        description: 'Owner user ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: Laptop
+          category: Computer
+          serial_number: SN-001
+          location: 'Computer Laboratory'
+          status: Available
+          description: 'Office laptop'
+          user_id: 1
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/equipments/{id}'
+    metadata:
+      custom: []
+      groupName: 'Equipment Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the equipment.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      equipment:
+        custom: []
+        name: equipment
+        description: 'The ID of the equipment.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      equipment: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/equipments/{equipment_id}'
+    metadata:
+      custom: []
+      groupName: 'Equipment Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      equipment_id:
+        custom: []
+        name: equipment_id
+        description: 'The ID of the equipment.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      equipment:
+        custom: []
+        name: equipment
+        description: 'The ID of the equipment.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      equipment_id: 1
+      equipment: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data:
+        custom: []
+        name: data
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'Equipment name.'
+        required: true
+        example: Laptop
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.category:
+        custom: []
+        name: data.attributes.category
+        description: 'Equipment category.'
+        required: true
+        example: Computer
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.serial_number:
+        custom: []
+        name: data.attributes.serial_number
+        description: 'Serial number.'
+        required: true
+        example: SN-001
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.location:
+        custom: []
+        name: data.attributes.location
+        description: 'Equipment location.'
+        required: true
+        example: 'Computer Laboratory'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.status:
+        custom: []
+        name: data.attributes.status
+        description: 'Equipment status.'
+        required: true
+        example: Available
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.description:
+        custom: []
+        name: data.attributes.description
+        description: 'Equipment description.'
+        required: true
+        example: 'Office laptop'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: Laptop
+          category: Computer
+          serial_number: SN-001
+          location: 'Computer Laboratory'
+          status: Available
+          description: 'Office laptop'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/v1/equipments/{equipment_id}'
+    metadata:
+      custom: []
+      groupName: 'Equipment Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_JWT_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      equipment_id:
+        custom: []
+        name: equipment_id
+        description: 'The ID of the equipment.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      equipment:
+        custom: []
+        name: equipment
+        description: 'The ID of the equipment.'
+        required: true
+        example: '1'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      equipment_id: 1
+      equipment: '1'
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      data.attributes:
+        custom: []
+        name: data.attributes
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data:
+        custom: []
+        name: data
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.attributes.name:
+        custom: []
+        name: data.attributes.name
+        description: 'Equipment name.'
+        required: false
+        example: Laptop
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.category:
+        custom: []
+        name: data.attributes.category
+        description: 'Equipment category.'
+        required: false
+        example: Computer
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.serial_number:
+        custom: []
+        name: data.attributes.serial_number
+        description: 'Serial number.'
+        required: false
+        example: SN-001
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      data.attributes.location:
+        custom: []
+        name: data.attributes.location
+        description: 'Equipment location.'
+        required: false
+        example: 'Computer Laboratory'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.status:
+        custom: []
+        name: data.attributes.status
+        description: 'Equipment status.'
+        required: false
+        example: Available
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      data.attributes.description:
+        custom: []
+        name: data.attributes.description
+        description: 'Equipment description.'
+        required: false
+        example: 'Office laptop'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      data.attributes.user_id:
+        custom: []
+        name: data.attributes.user_id
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      data:
+        attributes:
+          name: Laptop
+          category: Computer
+          serial_number: SN-001
+          location: 'Computer Laboratory'
+          status: Available
+          description: 'Office laptop'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

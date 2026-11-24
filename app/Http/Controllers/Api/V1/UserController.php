@@ -15,6 +15,9 @@ use App\Models\User;
 class UserController extends APIController
 {
     /**
+     * @group User Management
+     * @authenticated
+     *
      * GET /api/v1/users
      * Lists every user with filters and sorting from the URL.
      */
@@ -26,6 +29,9 @@ class UserController extends APIController
     }
 
     /**
+     * @group User Management
+     * @authenticated
+     *
      * POST /api/v1/users
      * Creates a user (needs the user:create ability).
      */
@@ -43,6 +49,9 @@ class UserController extends APIController
     }
 
     /**
+     * @group User Management
+     * @authenticated
+     *
      * GET /api/v1/users/{user}
      * Shows one user. ?include=equipments loads the user's equipments.
      */
@@ -56,6 +65,9 @@ class UserController extends APIController
     }
 
     /**
+     * @group User Management
+     * @authenticated
+     *
      * PATCH /api/v1/users/{user}
      * Updates only the fields that were sent.
      */
@@ -73,6 +85,9 @@ class UserController extends APIController
     }
 
     /**
+     * @group User Management
+     * @authenticated
+     *
      * PUT /api/v1/users/{user}
      * Replaces the whole user: every field is required.
      */
@@ -90,6 +105,9 @@ class UserController extends APIController
     }
 
     /**
+     * @group User Management
+     * @authenticated
+     *
      * DELETE /api/v1/users/{user}
      * Deletes the user (needs user:delete).
      */

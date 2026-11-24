@@ -9,7 +9,17 @@ use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    // Register User
+    /**
+     * @group Authentication
+     *
+     * Register a new user account.
+     *
+     * Newly registered accounts are assigned regular user permissions.
+     *
+     * @bodyParam name string required The user's full name. Example: Juan Dela Cruz
+     * @bodyParam email string required The user's email address. Example: juan@example.com
+     * @bodyParam password string required Password with at least 8 characters. Example: password123
+     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -44,7 +54,16 @@ class AuthController extends Controller
         ], 201);
     }
 
-    // Login User
+    /**
+     * @group Authentication
+     *
+     * Authenticate a user and generate a JWT access token.
+     *
+     * Use the returned token as a Bearer Token for protected API endpoints.
+     *
+     * @bodyParam email string required The registered user's email address. Example: juan@example.com
+     * @bodyParam password string required The user's password. Example: password123
+     */
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [

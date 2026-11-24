@@ -13,7 +13,11 @@ use App\Models\User;
 class UserEquipmentsController extends APIController
 {
     /**
+     * @group User Equipment Management
+     *
      * List equipment belonging to one user.
+     *
+     * @urlParam user required The ID of the user. Example: 1
      */
     public function index(User $user, EquipmentFilter $filters)
     {
@@ -25,7 +29,15 @@ class UserEquipmentsController extends APIController
     }
 
     /**
+     * @group User Equipment Management
+     * @authenticated
+     *
      * Create equipment for the user in the URL.
+     *
+     * @urlParam user required The ID of the user. Example: 1
+     * @bodyParam data.attributes.name string required Equipment name. Example: Laptop
+     * @bodyParam data.attributes.category string required Equipment category. Example: Computer
+     * @bodyParam data.attributes.location string required Equipment location. Example: Computer Laboratory
      */
     public function store(StoreEquipmentRequest $request, User $user)
     {
@@ -43,7 +55,13 @@ class UserEquipmentsController extends APIController
     }
 
     /**
+     * @group User Equipment Management
+     * @authenticated
+     *
      * Replace equipment belonging to the specified user.
+     *
+     * @urlParam user required The ID of the user. Example: 1
+     * @urlParam equipment required The ID of the equipment. Example: 1
      */
     public function replace(
         ReplaceEquipmentRequest $request,
@@ -62,7 +80,13 @@ class UserEquipmentsController extends APIController
     }
 
     /**
+     * @group User Equipment Management
+     * @authenticated
+     *
      * Update equipment belonging to the specified user.
+     *
+     * @urlParam user required The ID of the user. Example: 1
+     * @urlParam equipment required The ID of the equipment. Example: 1
      */
     public function update(
         UpdateEquipmentRequest $request,
@@ -79,7 +103,13 @@ class UserEquipmentsController extends APIController
     }
 
     /**
+     * @group User Equipment Management
+     * @authenticated
+     *
      * Delete equipment belonging to the specified user.
+     *
+     * @urlParam user required The ID of the user. Example: 1
+     * @urlParam equipment required The ID of the equipment. Example: 1
      */
     public function destroy(User $user, Equipment $equipment)
     {

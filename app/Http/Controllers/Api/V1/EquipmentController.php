@@ -12,7 +12,16 @@ use App\Permissions\V1\Abilities;
 
 class EquipmentController extends APIController
 {
-    // GET - Retrieve all equipments
+    /**
+     * @group Equipment Management
+     *
+     * Retrieve all equipment records.
+     *
+     * @queryParam filter[name] Filter by equipment name. Use * as a wildcard. Example: Laptop*
+     * @queryParam filter[status] Filter by status. Multiple values may be comma-separated. Example: Available,In Use
+     * @queryParam sort Sort by name, category, location, status, or created_at. Example: name
+     * @queryParam include Include related author information. Example: author
+     */
     public function index(EquipmentFilter $filters)
     {
         $equipments = Equipment::filter($filters);
@@ -26,13 +35,34 @@ class EquipmentController extends APIController
         );
     }
 
-    // GET - Retrieve one equipment by ID
+    /**
+     * @group Equipment Management
+     *
+     * Retrieve one equipment record by ID.
+     *
+     * @urlParam equipment required The ID of the equipment. Example: 1
+     */
     public function show(Equipment $equipment)
     {
         return new EquipmentResource($equipment);
     }
 
-    // POST - Create equipment
+    /**
+     * @group Equipment Management
+     * @authenticated
+     *
+     * Create a new equipment record.
+     *
+     * Requires authentication and permission to create equipment.
+     *
+     * @bodyParam data.attributes.name string required Equipment name. Example: Laptop
+     * @bodyParam data.attributes.category string required Equipment category. Example: Computer
+     * @bodyParam data.attributes.serial_number string Serial number. Example: SN-001
+     * @bodyParam data.attributes.location string required Equipment location. Example: Computer Laboratory
+     * @bodyParam data.attributes.status string Equipment status. Example: Available
+     * @bodyParam data.attributes.description string Equipment description. Example: Office laptop
+     * @bodyParam data.attributes.user_id integer required Owner user ID. Example: 1
+     */
     public function store(StoreEquipmentRequest $request)
     {
         if ($this->isAble('store', Equipment::class)) {
@@ -54,7 +84,16 @@ class EquipmentController extends APIController
         );
     }
 
-    // DELETE - Delete equipment
+    /**
+     * @group Equipment Management
+     * @authenticated
+     *
+     * Delete an equipment record.
+     *
+     * Requires authentication and permission to delete the equipment.
+     *
+     * @urlParam equipment required The ID of the equipment. Example: 1
+     */
     public function destroy(Equipment $equipment)
     {
         if ($this->isAble('delete', $equipment)) {
@@ -71,7 +110,22 @@ class EquipmentController extends APIController
         );
     }
 
-    // PUT - Replace equipment
+    /**
+     * @group Equipment Management
+     * @authenticated
+     *
+     * Replace all editable fields of an equipment record.
+     *
+     * Requires authentication and permission to replace the equipment.
+     *
+     * @urlParam equipment required The ID of the equipment. Example: 1
+     * @bodyParam data.attributes.name string required Equipment name. Example: Laptop
+     * @bodyParam data.attributes.category string required Equipment category. Example: Computer
+     * @bodyParam data.attributes.serial_number string required Serial number. Example: SN-001
+     * @bodyParam data.attributes.location string required Equipment location. Example: Computer Laboratory
+     * @bodyParam data.attributes.status string required Equipment status. Example: Available
+     * @bodyParam data.attributes.description string required Equipment description. Example: Office laptop
+     */
     public function replace(
         ReplaceEquipmentRequest $request,
         Equipment $equipment
@@ -87,7 +141,22 @@ class EquipmentController extends APIController
         );
     }
 
-    // PATCH - Update equipment
+    /**
+     * @group Equipment Management
+     * @authenticated
+     *
+     * Partially update an equipment record.
+     *
+     * Requires authentication and permission to update the equipment.
+     *
+     * @urlParam equipment required The ID of the equipment. Example: 1
+     * @bodyParam data.attributes.name string Equipment name. Example: Laptop
+     * @bodyParam data.attributes.category string Equipment category. Example: Computer
+     * @bodyParam data.attributes.serial_number string Serial number. Example: SN-001
+     * @bodyParam data.attributes.location string Equipment location. Example: Computer Laboratory
+     * @bodyParam data.attributes.status string Equipment status. Example: Available
+     * @bodyParam data.attributes.description string Equipment description. Example: Office laptop
+     */
     public function update(
         UpdateEquipmentRequest $request,
         Equipment $equipment
