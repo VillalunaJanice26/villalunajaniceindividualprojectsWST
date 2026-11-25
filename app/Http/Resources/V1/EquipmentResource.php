@@ -20,7 +20,7 @@ class EquipmentResource extends JsonResource
             'location' => $this->location,
             'status' => $this->status,
             'description' => $this->when(
-                $request->route('id') !== null,
+                $request->route('equipment') !== null,
                 $this->description
             ),
             'author' => new UserResource($this->whenLoaded('author')),
